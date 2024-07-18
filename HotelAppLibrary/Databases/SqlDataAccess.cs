@@ -38,5 +38,24 @@ namespace HotelAppLibrary.Databases
                 return rows;
             }
         }
+
+        public void SaveData<T>(string sqlStatement,
+                                T parameters,
+                                string connectionStringName,
+                                dynamic options = null)
+        {
+            string connectionString = _config.GetConnectionString(connectionStringName);
+            CommandType commandType = CommandType.Text;
+
+            if (options.isStoredProcedure != null && options.isStoredProcedure == true)
+            {
+                commandType = CommandType.StoredProcedure;
+            }
+
+            using (IDbConnection conn = new SqlConnection())
+            {
+                conn.Execute(sqlStatement, parameters, commandType: commandType);
+            }
+        }
     }
 }
