@@ -19,13 +19,22 @@ namespace HotelAppLibrary.Databases
             _config = config;
         }
 
-        public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionStringName)
+        public List<T> LoadData<T, U>(string sqlStatement,
+                                      U parameters,
+                                      string connectionStringName,
+                                      dynamic options = null)
         {
             string connectionString = _config.GetConnectionString(connectionStringName);
+            CommandType commandType = CommandType.Text;
+
+            if (options.isStoredProcedure != null && options.isStoredProcedure == true)
+            {
+                commandType = CommandType.StoredProcedure;
+            }
 
             using (IDbConnection conn = new SqlConnection(connectionString))
             {
-                List<T> rows = conn.Query<T>(sqlStatement,parameters).ToList();
+                List<T> rows = conn.Query<T>(sqlStatement,parameters, commandType: commandType).ToList();
                 return rows;
             }
         }
