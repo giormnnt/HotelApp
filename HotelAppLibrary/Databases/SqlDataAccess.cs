@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HotelAppLibrary.Databases
 {
-    public class SqlDataAccess
+    public class SqlDataAccess : ISqlDataAccess
     {
         private readonly IConfiguration _config;
 
@@ -22,19 +22,19 @@ namespace HotelAppLibrary.Databases
         public List<T> LoadData<T, U>(string sqlStatement,
                                       U parameters,
                                       string connectionStringName,
-                                      dynamic options = null)
+                                      bool isStoredProcedure = false)
         {
             string connectionString = _config.GetConnectionString(connectionStringName);
             CommandType commandType = CommandType.Text;
 
-            if (options.isStoredProcedure != null && options.isStoredProcedure == true)
+            if (isStoredProcedure)
             {
                 commandType = CommandType.StoredProcedure;
             }
 
             using (IDbConnection conn = new SqlConnection(connectionString))
             {
-                List<T> rows = conn.Query<T>(sqlStatement,parameters, commandType: commandType).ToList();
+                List<T> rows = conn.Query<T>(sqlStatement, parameters, commandType: commandType).ToList();
                 return rows;
             }
         }
@@ -42,12 +42,12 @@ namespace HotelAppLibrary.Databases
         public void SaveData<T>(string sqlStatement,
                                 T parameters,
                                 string connectionStringName,
-                                dynamic options = null)
+                                bool isStoredProcedure = false)
         {
             string connectionString = _config.GetConnectionString(connectionStringName);
             CommandType commandType = CommandType.Text;
 
-            if (options.isStoredProcedure != null && options.isStoredProcedure == true)
+            if (isStoredProcedure)
             {
                 commandType = CommandType.StoredProcedure;
             }
