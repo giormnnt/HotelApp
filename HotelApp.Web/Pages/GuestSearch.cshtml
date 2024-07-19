@@ -1,0 +1,57 @@
+﻿@page
+@model HotelApp.Web.Pages.GuestSearchModel
+@{
+    ViewData["Title"] = "Search for Guest";
+}
+
+<h1>Search for Guest</h1>
+<form method="POST" class="mt-4">
+    <div class="form-group mb-3">
+        <label asp-for="@Model.LastName"></label>
+        <input asp-for="@Model.LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (Model.Bookings?.Count > 0)
+{
+    <br />
+    <h2>Search Results</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Reservation</th>
+                <th>Room</th>
+                <th>Room Number</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+                <th>Total Cost</th>
+                <th>Check-In</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr>
+                    <td>@booking.FirstName @booking.LastName</td>
+                    <td>@booking.Title</td>
+                    <td>@booking.RoomNumber</td>
+                    <td>@booking.StartDate.ToShortDateString()</td>
+                    <td>@booking.EndDate.ToShortDateString()</td>
+                    <td>@string.Format("{0:C}", booking.TotalCost)</td>
+                    <th>@booking.CheckIn</th>
+                    <th>
+                        <button class="btn btn-primary">Check-In</button>
+                    </th>
+                    <th>
+                        <button class="btn btn-danger">Delete</button>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
