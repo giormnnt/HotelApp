@@ -72,5 +72,10 @@ namespace HotelAppLibrary.Data
         {
             _db.SaveData("dbo.spBookings_CheckIn", new {Id = bookingId}, connectionStringName, true);
         }
+
+        public void DeleteBooking(int bookingId)
+        {
+            _db.SaveData("dbo.spBookings_Delete", new { Id = bookingId }, connectionStringName, true);
+        }
     }
 }
