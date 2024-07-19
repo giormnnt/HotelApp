@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelAppLibrary.Data
 {
-    public class SqlData
+    public class SqlData : ISqlData
     {
         private readonly ISqlDataAccess _db;
         private const string connectionStringName = "SqlDb";
@@ -49,13 +49,14 @@ namespace HotelAppLibrary.Data
                                                                               connectionStringName,
                                                                               true);
             _db.SaveData("dbo.spBookings_Insert",
-                         new { 
-                                roomId = availableRooms.First().Id, 
-                                guestId = guest.Id,
-                                startDate,
-                                endDate,
-                                totalCost = timeStaying.Days * roomType.Price
-                            },
+                         new
+                         {
+                             roomId = availableRooms.First().Id,
+                             guestId = guest.Id,
+                             startDate,
+                             endDate,
+                             totalCost = timeStaying.Days * roomType.Price
+                         },
                          connectionStringName,
                          true);
         }
@@ -70,7 +71,7 @@ namespace HotelAppLibrary.Data
 
         public void CheckInGuest(int bookingId)
         {
-            _db.SaveData("dbo.spBookings_CheckIn", new {Id = bookingId}, connectionStringName, true);
+            _db.SaveData("dbo.spBookings_CheckIn", new { Id = bookingId }, connectionStringName, true);
         }
 
         public void DeleteBooking(int bookingId)
