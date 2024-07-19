@@ -13,11 +13,13 @@ namespace HotelApp.Web.Pages
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
         [BindProperty(SupportsGet = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; } = DateTime.Now;
 
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         [BindProperty(SupportsGet = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(1);
 
         [BindProperty(SupportsGet = true)]
@@ -29,6 +31,7 @@ namespace HotelApp.Web.Pages
         }
 
         public List<RoomTypeModel> AvailableRoomTypes { get; set; }
+
         public void OnGet()
         {
             if (SearchEnabled)
@@ -39,11 +42,11 @@ namespace HotelApp.Web.Pages
 
         public IActionResult OnPost()
         {
-            return RedirectToPage(new 
-            { 
-                SearchEnabled = true, 
-                StartDate = StartDate.ToString("yyyy-MM-dd"), 
-                EndDate = EndDate.ToString("yyyy-MM-dd") 
+            return RedirectToPage(new
+            {
+                SearchEnabled = true,
+                StartDate = StartDate.ToString("yyyy-MM-dd"),
+                EndDate = EndDate.ToString("yyyy-MM-dd")
             });
         }
     }
