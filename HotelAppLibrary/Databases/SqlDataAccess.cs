@@ -52,7 +52,7 @@ namespace HotelAppLibrary.Databases
                 commandType = CommandType.StoredProcedure;
             }
 
-            using (IDbConnection conn = new SqlConnection())
+            using (IDbConnection conn = new SqlConnection(connectionString))
             {
                 conn.Execute(sqlStatement, parameters, commandType: commandType);
             }
