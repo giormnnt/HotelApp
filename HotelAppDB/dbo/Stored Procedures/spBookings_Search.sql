@@ -13,6 +13,6 @@ BEGIN
 	INNER JOIN dbo.Guests g ON b.GuestId = g.Id
 	INNER JOIN dbo.Rooms r ON b.RoomId = r.Id
 	INNER JOIN dbo.RoomTypes rt on r.RoomTypeId = rt.Id
-	WHERE b.StartDate = @startDate AND g.LastName = @lastName;
+	WHERE b.StartDate >= @startDate AND g.LastName = @lastName;
 
 END
