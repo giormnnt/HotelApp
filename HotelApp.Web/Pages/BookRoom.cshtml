@@ -5,3 +5,21 @@
 }
 
 <h1>Book A Room</h1>
+
+<h2>@Model.RoomType.Title</h2>
+<p>
+    @Model.RoomType.Description
+</p>
+<form method="POST" class="mt-4">
+    <div class="form-group mb-3">
+        <label asp-for="@Model.FirstName" class="form-label"></label>
+        <input asp-for="@Model.FirstName" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="@Model.LastName" class="form-label"></label>
+        <input asp-for="@Model.LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Book</button>
+    </div>
+</form>
