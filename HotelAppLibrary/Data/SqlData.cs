@@ -78,5 +78,13 @@ namespace HotelAppLibrary.Data
         {
             _db.SaveData("dbo.spBookings_Delete", new { Id = bookingId }, connectionStringName, true);
         }
+
+        public RoomTypeModel GetRoomTypeById(int id)
+        {
+            return _db.LoadData<RoomTypeModel, dynamic>("dbo.spRoomTypes_GetById",
+                                                        new { id },
+                                                        connectionStringName,
+                                                        true).FirstOrDefault();
+        }
     }
 }
