@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelAppLibrary.Data
 {
-    public class SqlData : ISqlData
+    public class SqlData : IDatabaseData
     {
         private readonly ISqlDataAccess _db;
         private const string connectionStringName = "SqlDb";
