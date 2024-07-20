@@ -43,13 +43,13 @@
                     <td>@booking.StartDate.ToShortDateString()</td>
                     <td>@booking.EndDate.ToShortDateString()</td>
                     <td>@string.Format("{0:C}", booking.TotalCost)</td>
-                    <th>@booking.CheckIn</th>
-                    <th>
+                    <td>@booking.CheckIn</td>
+                    <td>
                         <button class="btn btn-primary">Check-In</button>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <button class="btn btn-danger">Delete</button>
-                    </th>
+                    </td>
                 </tr>
             }
         </tbody>
