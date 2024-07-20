@@ -40,5 +40,15 @@ namespace HotelApp.Web.Pages
                 LastName 
             });
         }
+
+        public IActionResult OnPostCheckIn(int bookingId)
+        {
+            _db.CheckInGuest(bookingId);
+            return RedirectToPage(new
+            {
+                SearchEnabled = true,
+                LastName
+            });
+        }
     }
 }
