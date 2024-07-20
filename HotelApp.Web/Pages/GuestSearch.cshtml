@@ -46,13 +46,17 @@
                     <td>@booking.CheckIn</td>
                     <td>
                         <form method="POST" asp-page-handler="CheckIn">
-                            <input type="hidden" name="bookingId" value="@booking.Id"/>
-                            <input type="hidden" name="lastName" value="@booking.LastName"/>
+                            <input type="hidden" name="bookingId" value="@booking.Id" />
+                            <input type="hidden" name="lastName" value="@booking.LastName" />
                             <button class="btn btn-primary">@(booking.CheckIn ? "Check-Out" : "Check-In")</button>
                         </form>
                     </td>
                     <td>
-                        <button class="btn btn-danger">Delete</button>
+                        <form method="POST" asp-page-handler="Delete">
+                            <input type="hidden" name="bookingId" value="@booking.Id" />
+                            <input type="hidden" name="lastName" value="@booking.LastName" />
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }
