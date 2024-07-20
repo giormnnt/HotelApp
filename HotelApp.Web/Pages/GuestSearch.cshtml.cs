@@ -50,5 +50,15 @@ namespace HotelApp.Web.Pages
                 LastName
             });
         }
+
+        public IActionResult OnPostDelete(int bookingId)
+        {
+            _db.DeleteBooking(bookingId);
+            return RedirectToPage(new
+            {
+                SearchEnabled = true,
+                LastName
+            });
+        }
     }
 }
