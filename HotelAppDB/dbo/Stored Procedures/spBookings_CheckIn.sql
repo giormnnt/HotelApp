@@ -5,6 +5,6 @@ BEGIN
 	SET NOCOUNT ON;
 
 	UPDATE dbo.Bookings
-	set CheckIn = 1
+	SET CheckIn = CASE WHEN CheckIn = 1 THEN 0 ELSE 1 END
 	WHERE Id = @Id
 END
